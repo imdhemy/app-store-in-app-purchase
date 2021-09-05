@@ -3,6 +3,8 @@
 namespace Imdhemy\AppStore\Tests\Receipts;
 
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use Imdhemy\AppStore\ClientFactory;
 use Imdhemy\AppStore\Exceptions\InvalidReceiptException;
 use Imdhemy\AppStore\Receipts\ReceiptResponse;
@@ -13,40 +15,79 @@ class VerifierTest extends TestCase
 {
     /**
      * @test
-     * @throws GuzzleException|InvalidReceiptException
+     * @throws GuzzleException
+     * @throws InvalidReceiptException
      */
     public function test_verify_subscription()
     {
         // Given
-        $iosReceipt = json_decode(file_get_contents(__DIR__ . '/../subscription-receipt.json'), true);
-        $client = ClientFactory::createSandbox();
-        $password = getenv('PASSWORD');
+        $body = $this->getVerifyReceiptResponse();
+        $expectedResponse = new Response(200, [], $body);
+        $transactions = [];
+        $client = ClientFactory::mock($expectedResponse, $transactions);
 
+        $subscriptionReceiptContent = $this->getSubscriptionReceipt();
+        $iosReceipt = json_decode($subscriptionReceiptContent, true);
+
+        $password = "fake_password";
         $receiptData = $iosReceipt['transactionReceipt'];
-        $receipt = new Verifier($client, $receiptData, $password);
+        $verifier = new Verifier($client, $receiptData, $password);
 
         // when
-        $response = $receipt->verifyRenewable();
+        $receiptResponse = $verifier->verify();
 
         // then
-        $this->assertInstanceOf(ReceiptResponse::class, $response);
+        $this->assertInstanceOf(ReceiptResponse::class, $receiptResponse);
+        $this->assertCount(1, $transactions);
+
+        /** @var Request $transactionRequest */
+        $transactionRequest = $transactions[0]['request'];
+        $this->assertEquals('POST', $transactionRequest->getMethod());
+        $this->assertEquals(Verifier::VERIFY_RECEIPT_PATH, $transactionRequest->getUri()->getPath());
+
+        /** @var Response $transactionResponse */
+        $transactionResponse = $transactions[0]['response'];
+        $this->assertSame($expectedResponse, $transactionResponse);
     }
 
     /**
      * @test
-     * @throws GuzzleException|InvalidReceiptException
+     * @throws GuzzleException
+     * @throws InvalidReceiptException
      */
-    public function test_sandbox_receipt_with_only_one_receipt()
+    public function test_verify_subscription_on_test_environment()
     {
-        $iosReceipt = json_decode(file_get_contents(__DIR__ . '/../single-receipt.json'), true);
-        $receiptData = $iosReceipt['token'];
-        $client = ClientFactory::createSandbox();
-        $password = getenv('PASSWORD');
+        // Given
+        $testEnvBody = $this->getVerifyReceiptResponse(['status' => Verifier::TEST_ENV_CODE]);
+        $testEnvResponse = new Response(200, [], $testEnvBody);
 
-        $receipt = new Verifier($client, $receiptData, $password);
-        $response = $receipt->verifyRenewable();
+        $body = $this->getVerifyReceiptResponse();
+        $expectedResponse = new Response(200, [], $body);
+        $transactions = [];
 
-        $this->assertInstanceOf(ReceiptResponse::class, $response);
+        $client = ClientFactory::mockQueue([$testEnvResponse, $expectedResponse], $transactions);
+
+        $subscriptionReceiptContent = $this->getSubscriptionReceipt();
+        $iosReceipt = json_decode($subscriptionReceiptContent, true);
+
+        $password = "fake_password";
+        $receiptData = $iosReceipt['transactionReceipt'];
+        $verifier = new Verifier($client, $receiptData, $password);
+
+        // when
+        $receiptResponse = $verifier->verifyRenewable($client);
+
+        // then
+        $this->assertInstanceOf(ReceiptResponse::class, $receiptResponse);
+        $this->assertCount(2, $transactions);
+
+        /** @var Request $transactionRequest */
+        $transactionRequest = $transactions[0]['request'];
+        $this->assertEquals('POST', $transactionRequest->getMethod());
+        $this->assertEquals(Verifier::VERIFY_RECEIPT_PATH, $transactionRequest->getUri()->getPath());
+
+        $this->assertSame($testEnvResponse, $transactions[0]['response']);
+        $this->assertSame($expectedResponse, $transactions[1]['response']);
     }
 
     /**
@@ -57,8 +98,7 @@ class VerifierTest extends TestCase
     {
         $this->expectException(InvalidReceiptException::class);
 
-        $iosReceipt = json_decode(file_get_contents(__DIR__ . '/../single-receipt.json'), true);
-        $receiptData = $iosReceipt['token'];
+        $receiptData = base64_encode('fake_receipt_data');
         $client = ClientFactory::createSandbox();
 
         (new Verifier($client, $receiptData, ''))->verifyRenewable();

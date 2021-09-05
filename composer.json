@@ -1,7 +1,7 @@
 {
   "name": "imdhemy/appstore-iap",
   "description": "PHP Appstore In-App Purchase implementation",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "authors": [
     {
       "name": "imdhemy",
@@ -9,16 +9,16 @@
     }
   ],
   "require": {
-    "guzzlehttp/guzzle": "^6.0|^7.0",
-    "nesbot/carbon": "^2.41",
-    "ext-json": "*"
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.0|^7.3",
+    "nesbot/carbon": "^2.51"
   },
   "require-dev": {
-    "phpunit/phpunit": "^8.5",
-    "symfony/var-dumper": "^5.1",
-    "vimeo/psalm": "^3.17",
-    "friendsofphp/php-cs-fixer": "^2.16",
-    "fakerphp/faker": "^1.14"
+    "phpunit/phpunit": "^9.5",
+    "symfony/var-dumper": "^5.3",
+    "vimeo/psalm": "^4.9",
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "fakerphp/faker": "^1.15"
   },
   "autoload": {
     "psr-4": {
@@ -34,5 +34,8 @@
     "psalm": "vendor/bin/psalm",
     "psalm-info": "vendor/bin/psalm --show-info=true",
     "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+  },
+  "config": {
+    "sort-packages": true
   }
 }

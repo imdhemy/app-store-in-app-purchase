@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Imdhemy\AppStore\ValueObjects;
 
 use Carbon\Carbon;
@@ -43,6 +42,14 @@ class Time
      * @return Carbon
      */
     public function getCarbon(): Carbon
+    {
+        return $this->carbon;
+    }
+
+    /**
+     * @return Carbon
+     */
+    public function toCarbon(): Carbon
     {
         return $this->carbon;
     }

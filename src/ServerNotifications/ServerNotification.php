@@ -1,27 +1,31 @@
 <?php
 
-
 namespace Imdhemy\AppStore\ServerNotifications;
 
 use Imdhemy\AppStore\Receipts\ReceiptResponse;
 use Imdhemy\AppStore\ValueObjects\Time;
 
+/**
+ * App Store Server Notifications
+ * @see https://developer.apple.com/documentation/appstoreservernotifications?changes=latest_minor
+ */
 class ServerNotification
 {
-    const CANCEL = 'CANCEL';
-    const DID_CHANGE_RENEWAL_PREF = 'DID_CHANGE_RENEWAL_PREF';
-    const DID_CHANGE_RENEWAL_STATUS = 'DID_CHANGE_RENEWAL_STATUS';
-    const DID_FAIL_TO_RENEW = 'DID_FAIL_TO_RENEW';
-    const DID_RECOVER = 'DID_RECOVER';
-    const DID_RENEW = 'DID_RENEW';
-    const INITIAL_BUY = 'INITIAL_BUY';
-    const INTERACTIVE_RENEWAL = 'INTERACTIVE_RENEWAL';
-    const PRICE_INCREASE_CONSENT = 'PRICE_INCREASE_CONSENT';
-    const REFUND = 'REFUND';
-    const REVOKE = 'REVOKE';
+    public const CANCEL = 'CANCEL';
+    public const CONSUMPTION_REQUEST = 'CONSUMPTION_REQUEST';
+    public const DID_CHANGE_RENEWAL_PREF = 'DID_CHANGE_RENEWAL_PREF';
+    public const DID_CHANGE_RENEWAL_STATUS = 'DID_CHANGE_RENEWAL_STATUS';
+    public const DID_FAIL_TO_RENEW = 'DID_FAIL_TO_RENEW';
+    public const DID_RECOVER = 'DID_RECOVER';
+    public const DID_RENEW = 'DID_RENEW';
+    public const INITIAL_BUY = 'INITIAL_BUY';
+    public const INTERACTIVE_RENEWAL = 'INTERACTIVE_RENEWAL';
+    public const PRICE_INCREASE_CONSENT = 'PRICE_INCREASE_CONSENT';
+    public const REFUND = 'REFUND';
+    public const REVOKE = 'REVOKE';
 
     /**
-     * @var ReceiptResponse
+     * @var ReceiptResponse|null
      */
     protected $unifiedReceipt;
 
@@ -31,32 +35,32 @@ class ServerNotification
     protected $autoRenewStatusChangeDate;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $environment;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     protected $autoRenewStatus;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bvrs;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $bid;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $password;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $autoRenewProductId;
 
@@ -66,31 +70,47 @@ class ServerNotification
     protected $notificationType;
 
     /**
-     * @param array $attributes
-     * @return static
+     * @param string $notificationType
      */
-    public static function fromArray(array $attributes): self
+    public function __construct(string $notificationType)
     {
-        $obj = new self();
-        $obj->unifiedReceipt = new ReceiptResponse($attributes['unified_receipt']);
-        $obj->autoRenewStatusChangeDate = isset($attributes['auto_renew_status_change_date_ms']) ? new Time(
-            $attributes['auto_renew_status_change_date_ms']
-        ) : null;
-        $obj->environment = $attributes['environment'];
-        $obj->autoRenewStatus = $attributes['auto_renew_status'] === "true";
-        $obj->bvrs = $attributes['bvrs'];
-        $obj->bid = $attributes['bid'];
-        $obj->password = $attributes['password'];
-        $obj->autoRenewProductId = $attributes['auto_renew_product_id'];
-        $obj->notificationType = $attributes['notification_type'];
+        $this->notificationType = $notificationType;
+    }
+
+    /**
+     * @param array $attributes
+     * @return ServerNotification
+     */
+    public static function fromArray(array $attributes = []): self
+    {
+        $obj = new self($attributes['notification_type']);
+
+        $obj->unifiedReceipt = isset($attributes['unified_receipt']) ?
+            ReceiptResponse::fromArray($attributes['unified_receipt']) :
+            null;
+
+        $obj->autoRenewStatusChangeDate = isset($attributes['auto_renew_status_change_date_ms']) ?
+            new Time($attributes['auto_renew_status_change_date_ms']) :
+            null;
+
+        $obj->environment = $attributes['environment'] ?? null;
+
+        $obj->autoRenewStatus = isset($attributes['auto_renew_status']) ?
+            $attributes['auto_renew_status'] === "true" || $attributes['auto_renew_status'] === true :
+            null;
+
+        $obj->bvrs = $attributes['bvrs'] ?? null;
+        $obj->bid = $attributes['bid'] ?? null;
+        $obj->password = $attributes['password'] ?? null;
+        $obj->autoRenewProductId = $attributes['auto_renew_product_id'] ?? null;
 
         return $obj;
     }
 
     /**
-     * @return ReceiptResponse
+     * @return ReceiptResponse|null
      */
-    public function getUnifiedReceipt(): ReceiptResponse
+    public function getUnifiedReceipt(): ?ReceiptResponse
     {
         return $this->unifiedReceipt;
     }
@@ -104,49 +124,41 @@ class ServerNotification
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEnvironment(): string
+    public function getEnvironment(): ?string
     {
         return $this->environment;
     }
 
     /**
-     * @return bool
+     * @return string|null
      */
-    public function isAutoRenewStatus(): bool
-    {
-        return $this->autoRenewStatus;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBvrs(): string
+    public function getBvrs(): ?string
     {
         return $this->bvrs;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBid(): string
+    public function getBid(): ?string
     {
         return $this->bid;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAutoRenewProductId(): string
+    public function getAutoRenewProductId(): ?string
     {
         return $this->autoRenewProductId;
     }
@@ -157,5 +169,13 @@ class ServerNotification
     public function getNotificationType(): string
     {
         return $this->notificationType;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getAutoRenewStatus(): ?bool
+    {
+        return $this->autoRenewStatus;
     }
 }
