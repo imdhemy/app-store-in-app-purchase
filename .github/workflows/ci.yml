@@ -1,114 +1,36 @@
-# https://help.github.com/en/categories/automating-your-workflow-with-github-actions
-
-name: "Continuous Integration"
-
-on:
-  pull_request:
-  push:
-
+name: CI
+on: [ push, pull_request ]
 jobs:
-  phpunit:
-    name: "PHPUnit tests"
-
+  ci:
+    name: "CI"
     runs-on: ${{ matrix.operating-system }}
-
     strategy:
       matrix:
-        dependencies:
-          - "locked"
-        php-version:
-          - "8.0"
-          - "8.1"
-          - "8.2"
-        operating-system:
-          - "ubuntu-latest"
-          - "windows-latest"
-          - "macos-latest"
-
+        operating-system: [ ubuntu-latest, windows-latest, macos-latest ]
+        php-version: [ 8.0, 8.3 ]
     steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v3"
 
-      - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
+      # --------- Setup steps ---------
+      - name: "Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
         with:
           coverage: "pcov"
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
-          extensions: sodium, fileinfo
+          extensions: pcov, xdebug
 
       - name: "Install dependencies"
-        uses: "ramsey/composer-install@v2"
-        with:
-          dependency-versions: "${{ matrix.dependencies }}"
+        uses: ramsey/composer-install@v2
 
-      - name: "Tests"
+      # --------- Run steps ---------
+      - name: "Unit Tests"
         run: "composer test"
 
-  static-analysis-psalm:
-    name: "Static Analysis by Psalm"
+      - name: "Coding Style"
+        run: "composer cs-fix"
 
-    runs-on: ${{ matrix.operating-system }}
-
-    strategy:
-      matrix:
-        dependencies:
-          - "locked"
-        php-version:
-          - "8.0"
-        operating-system:
-          - "ubuntu-latest"
-
-    steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v3"
-
-      - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
-        with:
-          coverage: "none"
-          php-version: "${{ matrix.php-version }}"
-          ini-values: memory_limit=-1
-          extensions: sodium, fileinfo
-
-      - name: "Install dependencies"
-        uses: "ramsey/composer-install@v2"
-        with:
-          dependency-versions: "${{ matrix.dependencies }}"
-
-      - name: "psalm"
+      - name: "Static code analysis"
         run: "composer psalm"
-
-  coding-standards:
-    name: "Check Coding Standards"
-
-    runs-on: ${{ matrix.operating-system }}
-
-    strategy:
-      matrix:
-        dependencies:
-          - "locked"
-        php-version:
-          - "8.0"
-        operating-system:
-          - "ubuntu-latest"
-
-    steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v3"
-
-      - name: "Install PHP"
-        uses: "shivammathur/setup-php@v2"
-        with:
-          coverage: "none"
-          php-version: "${{ matrix.php-version }}"
-          ini-values: memory_limit=-1
-          extensions: sodium, fileinfo
-
-      - name: "Install dependencies"
-        uses: "ramsey/composer-install@v2"
-        with:
-          dependency-versions: "${{ matrix.dependencies }}"
-
-      - name: "Coding Standard"
-        run: "composer check-style"
