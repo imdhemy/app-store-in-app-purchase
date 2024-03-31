@@ -20,7 +20,7 @@ jobs:
           coverage: "pcov"
           php-version: "${{ matrix.php-version }}"
           ini-values: memory_limit=-1
-          extensions: pcov, xdebug
+          extensions: pcov, xdebug, sodium, fileinfo
 
       - name: "Install dependencies"
         uses: ramsey/composer-install@v2
