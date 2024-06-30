@@ -13,9 +13,6 @@ use Lcobucci\JWT\Signer;
  */
 final class Issuer
 {
-    /**
-     * @var string
-     */
     private string $id;
 
     /**
@@ -47,9 +44,6 @@ final class Issuer
         $this->signer = $signer;
     }
 
-    /**
-     * @return string
-     */
     public function id(): string
     {
         return $this->id;

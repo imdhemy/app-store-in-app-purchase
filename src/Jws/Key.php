@@ -41,9 +41,6 @@ final class Key implements JwtKey
         return $this->kid;
     }
 
-    /**
-     * @return string
-     */
     public function contents(): string
     {
         return $this->jwtKey->contents();

@@ -5,11 +5,6 @@
       <code><![CDATA[$responseQueue]]></code>
     </MixedArgumentTypeCoercion>
   </file>
-  <file src="src/Jws/AppStoreJwsGenerator.php">
-    <LessSpecificImplementedReturnType>
-      <code><![CDATA[JsonWebSignature]]></code>
-    </LessSpecificImplementedReturnType>
-  </file>
   <file src="src/Jws/AppStoreJwsVerifier.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$exportedCertificate]]></code>

@@ -24,11 +24,7 @@ class AppStoreJwsGenerator implements JwsGenerator
 
     /**
      * Generate a JWT
-     *
-     * @param array $claims
-     * @param array $headers
-     *
-     * @return JsonWebSignature
+     * @psalm-suppress ArgumentTypeCoercion
      */
     public function generate(array $claims = [], array $headers = []): JsonWebSignature
     {

@@ -37,11 +37,7 @@ class Parser implements JwsParser
     }
 
     /**
-     * Parse a JWT
-     *
-     * @param string $jws
-     *
-     * @return JsonWebSignature
+     * @psalm-suppress ArgumentTypeCoercion
      */
     public function parse(string $jws): JsonWebSignature
     {
