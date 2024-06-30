@@ -75,7 +75,7 @@ class AppStoreJwsGeneratorTest extends TestCase
     {
         $privateKey = InMemory::plainText($this->getEcdsaPrivateKey());
         $key = new Key('1234567890', $privateKey);
-        $issuer = new Issuer('issuer_id', 'com.some.thing', $key, Sha256::create());
+        $issuer = new Issuer('issuer_id', 'com.some.thing', $key, new Sha256());
         $clock = new FrozenClock(new DateTimeImmutable('2022-09-04 21:00:00'));
 
         return GeneratorConfig::forAppStore($issuer, $clock);

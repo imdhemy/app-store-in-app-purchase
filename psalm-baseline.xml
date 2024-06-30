@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505">
+  <file src="src/ClientFactory.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$responseQueue]]></code>
+    </MixedArgumentTypeCoercion>
+  </file>
+  <file src="src/Jws/AppStoreJwsVerifier.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$exportedCertificate]]></code>
+    </ArgumentTypeCoercion>
+    <InvalidReturnStatement>
+      <code><![CDATA[$chain]]></code>
+      <code><![CDATA[openssl_x509_read($contents)]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[resource]]></code>
+      <code><![CDATA[string[]]]></code>
+    </InvalidReturnType>
+    <MixedArgument>
+      <code><![CDATA[$certificate]]></code>
+      <code><![CDATA[$x5c]]></code>
+      <code><![CDATA[$x5c]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$certificate]]></code>
+      <code><![CDATA[$x5c]]></code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Jws/Jws.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$token]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Jws/Parser.php">
+    <MissingParamType>
+      <code><![CDATA[$signedPayload]]></code>
+    </MissingParamType>
+    <MixedArgument>
+      <code><![CDATA[$signedPayload]]></code>
+    </MixedArgument>
+  </file>
+  <file src="src/Jws/UnEncryptedTokenConcern.php">
+    <MixedInferredReturnType>
+      <code><![CDATA[DataSet]]></code>
+      <code><![CDATA[DataSet]]></code>
+      <code><![CDATA[Signature]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code><![CDATA[claims]]></code>
+      <code><![CDATA[hasBeenIssuedBefore]]></code>
+      <code><![CDATA[hasBeenIssuedBy]]></code>
+      <code><![CDATA[headers]]></code>
+      <code><![CDATA[isExpired]]></code>
+      <code><![CDATA[isIdentifiedBy]]></code>
+      <code><![CDATA[isMinimumTimeBefore]]></code>
+      <code><![CDATA[isPermittedFor]]></code>
+      <code><![CDATA[isRelatedTo]]></code>
+      <code><![CDATA[payload]]></code>
+      <code><![CDATA[signature]]></code>
+      <code><![CDATA[toString]]></code>
+    </MixedMethodCall>
+    <UndefinedThisPropertyFetch>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+      <code><![CDATA[$this->token]]></code>
+    </UndefinedThisPropertyFetch>
+  </file>
+  <file src="src/Receipts/ReceiptResponse.php">
+    <MixedArgument>
+      <code><![CDATA[$body['status']]]></code>
+      <code><![CDATA[$receiptInfo]]></code>
+      <code><![CDATA[$renewalInfo]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$obj->environment]]></code>
+      <code><![CDATA[$obj->isRetryable]]></code>
+      <code><![CDATA[$obj->latestReceipt]]></code>
+      <code><![CDATA[$obj->latestReceiptInfo]]></code>
+      <code><![CDATA[$obj->pendingRenewalInfo]]></code>
+      <code><![CDATA[$obj->receipt]]></code>
+      <code><![CDATA[$receiptInfo]]></code>
+      <code><![CDATA[$renewalInfo]]></code>
+    </MixedAssignment>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$environment]]></code>
+      <code><![CDATA[$isRetryable]]></code>
+      <code><![CDATA[$latestReceipt]]></code>
+      <code><![CDATA[$latestReceiptInfo]]></code>
+      <code><![CDATA[$pendingRenewalInfo]]></code>
+      <code><![CDATA[$receipt]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Receipts/Verifier.php">
+    <MixedArgument>
+      <code><![CDATA[$status]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$response]]></code>
+      <code><![CDATA[$status]]></code>
+    </MixedAssignment>
+    <MixedInferredReturnType>
+      <code><![CDATA[array]]></code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code><![CDATA[getBody]]></code>
+    </MixedMethodCall>
+    <MixedReturnStatement>
+      <code><![CDATA[json_decode((string)$response->getBody(), true)]]></code>
+    </MixedReturnStatement>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[post]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/ServerNotifications/ServerNotification.php">
+    <MixedArgument>
+      <code><![CDATA[$attributes['auto_renew_status_change_date_ms']]]></code>
+      <code><![CDATA[$attributes['notification_type']]]></code>
+      <code><![CDATA[$attributes['unified_receipt']]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$obj->autoRenewProductId]]></code>
+      <code><![CDATA[$obj->bid]]></code>
+      <code><![CDATA[$obj->bvrs]]></code>
+      <code><![CDATA[$obj->environment]]></code>
+      <code><![CDATA[$obj->password]]></code>
+    </MixedAssignment>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$autoRenewProductId]]></code>
+      <code><![CDATA[$autoRenewStatus]]></code>
+      <code><![CDATA[$autoRenewStatusChangeDate]]></code>
+      <code><![CDATA[$bid]]></code>
+      <code><![CDATA[$bvrs]]></code>
+      <code><![CDATA[$environment]]></code>
+      <code><![CDATA[$password]]></code>
+      <code><![CDATA[$rawData]]></code>
+      <code><![CDATA[$unifiedReceipt]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/ServerNotifications/TestNotificationService.php">
+    <MixedInferredReturnType>
+      <code><![CDATA[ResponseInterface]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->client->post('/inApps/v1/notifications/test', [
+            'headers' => [
+                'Authorization' => sprintf("Bearer %s", $jws),
+            ],
+        ])]]></code>
+    </MixedReturnStatement>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[post]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/ServerNotifications/V2DecodedPayload.php">
+    <MixedArgument>
+      <code><![CDATA[$this->rawData['data']]]></code>
+      <code><![CDATA[$this->rawData['signedDate']]]></code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code><![CDATA[$this->rawData['data']['signedRenewalInfo']]]></code>
+      <code><![CDATA[$this->rawData['data']['signedTransactionInfo']]]></code>
+    </MixedArrayAccess>
+    <MixedInferredReturnType>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string|null]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->rawData['notificationType']]]></code>
+      <code><![CDATA[$this->rawData['notificationUUID']]]></code>
+      <code><![CDATA[$this->rawData['subtype'] ?? null]]></code>
+      <code><![CDATA[$this->rawData['subtype'] ?? null]]></code>
+      <code><![CDATA[$this->rawData['version']]]></code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/ValueObjects/AppMetadata.php">
+    <MixedInferredReturnType>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->data['appAppleId']]]></code>
+      <code><![CDATA[$this->data['bundleId']]]></code>
+      <code><![CDATA[$this->data['bundleVersion']]]></code>
+      <code><![CDATA[$this->data['environment']]]></code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/ValueObjects/Cancellation.php">
+    <DeprecatedConstant>
+      <code><![CDATA[self::REASON_APP_ISSUE]]></code>
+      <code><![CDATA[self::REASON_OTHER]]></code>
+    </DeprecatedConstant>
+  </file>
+  <file src="src/ValueObjects/JwsRenewalInfo.php">
+    <MixedArgument>
+      <code><![CDATA[$this->getClaims()['gracePeriodExpiresDate']]]></code>
+      <code><![CDATA[$this->getClaims()['recentSubscriptionStartDate']]]></code>
+      <code><![CDATA[$this->getClaims()['signedDate']]]></code>
+    </MixedArgument>
+    <MixedInferredReturnType>
+      <code><![CDATA[bool|null]]></code>
+      <code><![CDATA[int|null]]></code>
+      <code><![CDATA[int|null]]></code>
+      <code><![CDATA[int|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->getClaims()['autoRenewProductId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['autoRenewProductId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['autoRenewStatus'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['autoRenewStatus'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['environment'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['environment'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['expirationIntent'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['expirationIntent'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['isInBillingRetryPeriod'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['isInBillingRetryPeriod'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['offerIdentifier'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['offerIdentifier'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['offerType'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['offerType'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['originalTransactionId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['originalTransactionId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['priceIncreaseStatus'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['priceIncreaseStatus'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['productId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['productId'] ?? null]]></code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/ValueObjects/JwsTransactionInfo.php">
+    <MixedArgument>
+      <code><![CDATA[$this->getClaims()['expiresDate']]]></code>
+      <code><![CDATA[$this->getClaims()['originalPurchaseDate']]]></code>
+      <code><![CDATA[$this->getClaims()['purchaseDate']]]></code>
+      <code><![CDATA[$this->getClaims()['revocationDate']]]></code>
+      <code><![CDATA[$this->getClaims()['signedDate']]]></code>
+    </MixedArgument>
+    <MixedInferredReturnType>
+      <code><![CDATA[bool|null]]></code>
+      <code><![CDATA[int|null]]></code>
+      <code><![CDATA[int|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->getClaims()['appAccountToken'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['appAccountToken'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['bundleId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['bundleId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['environment'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['environment'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['inAppOwnershipType'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['inAppOwnershipType'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['isUpgraded'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['isUpgraded'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['offerIdentifier'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['offerIdentifier'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['offerType'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['offerType'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['originalTransactionId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['originalTransactionId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['productId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['productId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['quantity'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['quantity'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['revocationReason'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['revocationReason'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['subscriptionGroupIdentifier'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['subscriptionGroupIdentifier'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['transactionId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['transactionId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['type'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['type'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['webOrderLineItemId'] ?? null]]></code>
+      <code><![CDATA[$this->getClaims()['webOrderLineItemId'] ?? null]]></code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/ValueObjects/LatestReceiptInfo.php">
+    <DeprecatedClass>
+      <code><![CDATA[?Cancellation]]></code>
+      <code><![CDATA[Cancellation|null]]></code>
+      <code><![CDATA[new Cancellation($this->getCancellationDate(), $this->getCancellationReason())]]></code>
+    </DeprecatedClass>
+    <MixedArgument>
+      <code><![CDATA[$attributes['original_transaction_id']]]></code>
+      <code><![CDATA[$attributes['product_id']]]></code>
+      <code><![CDATA[$attributes['quantity']]]></code>
+      <code><![CDATA[$attributes['transaction_id']]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$obj->appAccountToken]]></code>
+      <code><![CDATA[$obj->cancellationDate]]></code>
+      <code><![CDATA[$obj->cancellationReason]]></code>
+      <code><![CDATA[$obj->expiresDate]]></code>
+      <code><![CDATA[$obj->inAppOwnershipType]]></code>
+      <code><![CDATA[$obj->isInIntroOfferPeriod]]></code>
+      <code><![CDATA[$obj->isTrialPeriod]]></code>
+      <code><![CDATA[$obj->isUpgraded]]></code>
+      <code><![CDATA[$obj->offerCodeRefName]]></code>
+      <code><![CDATA[$obj->originalPurchaseDate]]></code>
+      <code><![CDATA[$obj->promotionalOfferId]]></code>
+      <code><![CDATA[$obj->purchaseDate]]></code>
+      <code><![CDATA[$obj->subscriptionGroupIdentifier]]></code>
+      <code><![CDATA[$obj->webOrderLineItemId]]></code>
+    </MixedAssignment>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$appAccountToken]]></code>
+      <code><![CDATA[$cancellationDate]]></code>
+      <code><![CDATA[$cancellationReason]]></code>
+      <code><![CDATA[$expiresDate]]></code>
+      <code><![CDATA[$inAppOwnershipType]]></code>
+      <code><![CDATA[$isInIntroOfferPeriod]]></code>
+      <code><![CDATA[$isTrialPeriod]]></code>
+      <code><![CDATA[$offerCodeRefName]]></code>
+      <code><![CDATA[$originalPurchaseDate]]></code>
+      <code><![CDATA[$promotionalOfferId]]></code>
+      <code><![CDATA[$purchaseDate]]></code>
+      <code><![CDATA[$subscriptionGroupIdentifier]]></code>
+      <code><![CDATA[$webOrderLineItemId]]></code>
+    </PropertyNotSetInConstructor>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$this->cancellationDate]]></code>
+      <code><![CDATA[$this->expiresDate]]></code>
+      <code><![CDATA[$this->originalPurchaseDate]]></code>
+      <code><![CDATA[$this->purchaseDate]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/ValueObjects/PendingRenewal.php">
+    <MixedArgument>
+      <code><![CDATA[$attributes['auto_renew_product_id']]]></code>
+      <code><![CDATA[$attributes['original_transaction_id']]]></code>
+      <code><![CDATA[$attributes['product_id']]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$obj->autoRenewStatus]]></code>
+      <code><![CDATA[$obj->expirationIntent]]></code>
+      <code><![CDATA[$obj->gracePeriodExpiresDate]]></code>
+      <code><![CDATA[$obj->isInBillingRetryPeriod]]></code>
+      <code><![CDATA[$obj->offerCodeRefName]]></code>
+      <code><![CDATA[$obj->priceConsentStatus]]></code>
+      <code><![CDATA[$obj->promotionalOfferId]]></code>
+    </MixedAssignment>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$autoRenewStatus]]></code>
+      <code><![CDATA[$expirationIntent]]></code>
+      <code><![CDATA[$gracePeriodExpiresDate]]></code>
+      <code><![CDATA[$isInBillingRetryPeriod]]></code>
+      <code><![CDATA[$offerCodeRefName]]></code>
+      <code><![CDATA[$priceConsentStatus]]></code>
+      <code><![CDATA[$promotionalOfferId]]></code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/ValueObjects/Receipt.php">
+    <MixedArgument>
+      <code><![CDATA[$receiptData]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$obj->adamId]]></code>
+      <code><![CDATA[$obj->appItemId]]></code>
+      <code><![CDATA[$obj->applicationVersion]]></code>
+      <code><![CDATA[$obj->bundleId]]></code>
+      <code><![CDATA[$obj->downloadId]]></code>
+      <code><![CDATA[$obj->expirationDate]]></code>
+      <code><![CDATA[$obj->inApp]]></code>
+      <code><![CDATA[$obj->originalApplicationVersion]]></code>
+      <code><![CDATA[$obj->originalPurchaseDate]]></code>
+      <code><![CDATA[$obj->preOrderDate]]></code>
+      <code><![CDATA[$obj->receiptCreationDate]]></code>
+      <code><![CDATA[$obj->receiptType]]></code>
+      <code><![CDATA[$obj->requestDate]]></code>
+      <code><![CDATA[$obj->versionExternalIdentifier]]></code>
+      <code><![CDATA[$receiptData]]></code>
+    </MixedAssignment>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$adamId]]></code>
+      <code><![CDATA[$appItemId]]></code>
+      <code><![CDATA[$applicationVersion]]></code>
+      <code><![CDATA[$bundleId]]></code>
+      <code><![CDATA[$downloadId]]></code>
+      <code><![CDATA[$expirationDate]]></code>
+      <code><![CDATA[$inApp]]></code>
+      <code><![CDATA[$originalApplicationVersion]]></code>
+      <code><![CDATA[$originalPurchaseDate]]></code>
+      <code><![CDATA[$preOrderDate]]></code>
+      <code><![CDATA[$receiptCreationDate]]></code>
+      <code><![CDATA[$receiptType]]></code>
+      <code><![CDATA[$requestDate]]></code>
+      <code><![CDATA[$versionExternalIdentifier]]></code>
+    </PropertyNotSetInConstructor>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$this->expirationDate]]></code>
+      <code><![CDATA[$this->originalPurchaseDate]]></code>
+      <code><![CDATA[$this->preOrderDate]]></code>
+      <code><![CDATA[$this->receiptCreationDate]]></code>
+      <code><![CDATA[$this->requestDate]]></code>
+    </RiskyTruthyFalsyComparison>
+  </file>
+  <file src="src/ValueObjects/Time.php">
+    <InvalidDocblock>
+      <code><![CDATA[public function equals(Time $time): bool]]></code>
+    </InvalidDocblock>
+  </file>
+</files>

@@ -31,7 +31,7 @@ class TestNotificationServiceTest extends TestCase
         $client = ClientFactory::mock(new Response(200, [], $body));
 
         $key = new Key('kid', InMemory::plainText($this->getEcdsaPrivateKey()));
-        $signer = Sha256::create();
+        $signer = new Sha256();
         $issuer = new Issuer('signer_id', 'bundle_id', $key, $signer);
         $config = GeneratorConfig::forAppStore($issuer);
 

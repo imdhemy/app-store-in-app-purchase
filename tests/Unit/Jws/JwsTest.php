@@ -75,7 +75,7 @@ class JwsTest extends TestCase
      */
     private function getPlain(): Plain
     {
-        $signer = Sha256::create();
+        $signer = new Sha256();
         $key = InMemory::plainText($this->getEcdsaPrivateKey());
 
         return Configuration::forSymmetricSigner($signer, $key)->builder()->getToken($signer, $key);

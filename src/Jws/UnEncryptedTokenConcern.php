@@ -22,6 +22,7 @@ trait UnEncryptedTokenConcern
 
     /**
      * Returns if the token is allowed to be used by the audience
+     * @param non-empty-string $audience
      */
     public function isPermittedFor(string $audience): bool
     {
@@ -30,6 +31,7 @@ trait UnEncryptedTokenConcern
 
     /**
      * Returns if the token has the given id
+     * @param non-empty-string $id
      */
     public function isIdentifiedBy(string $id): bool
     {
@@ -38,6 +40,7 @@ trait UnEncryptedTokenConcern
 
     /**
      * Returns if the token has the given subject
+     * @param non-empty-string $subject
      */
     public function isRelatedTo(string $subject): bool
     {
@@ -46,6 +49,7 @@ trait UnEncryptedTokenConcern
 
     /**
      * Returns if the token was issued by any of given issuers
+     * @psalm-suppress ArgumentTypeCoercion
      */
     public function hasBeenIssuedBy(string ...$issuers): bool
     {
@@ -78,6 +82,7 @@ trait UnEncryptedTokenConcern
 
     /**
      * Returns an encoded representation of the token
+     * @psalm-suppress LessSpecificImplementedReturnType
      */
     public function toString(): string
     {
@@ -102,6 +107,7 @@ trait UnEncryptedTokenConcern
 
     /**
      * Returns the token payload
+     * @psalm-suppress LessSpecificImplementedReturnType
      */
     public function payload(): string
     {

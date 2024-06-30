@@ -75,11 +75,11 @@ class Faker
         $key = InMemory::file(__DIR__ . '/fixtures/keys/ecdsa-private.pem');
 
         return (new JwtFacade())->issue(
-            Sha256::create(),
+            new Sha256(),
             $key,
             static function (Builder $builder, DateTimeImmutable $issuedAt) use ($claims): Builder {
                 foreach ($claims as $key => $value) {
-                    $builder->withClaim($key, $value);
+                    $builder = $builder->withClaim($key, $value);
                 }
 
                 return $builder;
