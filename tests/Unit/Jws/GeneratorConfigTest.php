@@ -19,7 +19,7 @@ class GeneratorConfigTest extends TestCase
     public function for_app_store(): void
     {
         $key = new Key('kid', InMemory::plainText($this->getEcdsaPrivateKey()));
-        $signer = Sha256::create();
+        $signer = new Sha256();
         $issuer = new Issuer('signer_id', 'bundle_id', $key, $signer);
         $clock = new FrozenClock(new DateTimeImmutable());
 

@@ -58,7 +58,7 @@ class AppStoreJwsVerifier implements JwsVerifier
         }
 
         openssl_x509_export($chain[0], $exportedCertificate);
-        (new SignedWith(Sha256::create(), InMemory::plainText($exportedCertificate)))->assert($jws);
+        (new SignedWith(new Sha256(), InMemory::plainText($exportedCertificate)))->assert($jws);
 
         return true;
     }
