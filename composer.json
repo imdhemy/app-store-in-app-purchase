@@ -22,6 +22,7 @@
     "fakerphp/faker": "^1.22",
     "friendsofphp/php-cs-fixer": "^3.16",
     "phpunit/phpunit": "^9.6",
+    "psalm/plugin-phpunit": "^0.19.0",
     "roave/security-advisories": "dev-latest",
     "vimeo/psalm": "^5.11"
   },
