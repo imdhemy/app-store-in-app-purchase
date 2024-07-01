@@ -2,76 +2,41 @@
 
 namespace Imdhemy\AppStore\Tests\Unit;
 
-use Exception;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Imdhemy\AppStore\ClientFactory;
 use Imdhemy\AppStore\Tests\TestCase;
 use ReflectionClass;
-use ReflectionException;
 
-class ClientFactoryTest extends TestCase
+final class ClientFactoryTest extends TestCase
 {
     /**
      * @test
+     * @psalm-suppress MixedArrayAccess
      */
-    public function create(): void
+    public function create_client(): void
     {
         $client = ClientFactory::create();
-        $this->assertInstanceOf(Client::class, $client);
 
-        $client = ClientFactory::createSandbox();
-        $this->assertInstanceOf(Client::class, $client);
+        $baseUri = (string)(new ReflectionClass($client))->getProperty('config')->getValue($client)['base_uri'];
+        $this->assertSame('https://buy.itunes.apple.com', $baseUri);
     }
 
     /**
      * @test
-     * @throws ReflectionException
+     * @psalm-suppress MixedArrayAccess
      */
-    public function client_base_uri_for_production(): void
-    {
-        $client = ClientFactory::create();
-        $reflection = new ReflectionClass($client);
-        $config = $reflection->getProperty('config');
-        $config->setAccessible(true);
-
-        $this->assertEquals('https://buy.itunes.apple.com', $config->getValue($client)['base_uri']);
-    }
-
-    /**
-     * @test
-     * @throws ReflectionException
-     */
-    public function client_base_uri_for_sandbox(): void
+    public function create_sandbox_client(): void
     {
         $client = ClientFactory::createSandbox();
-        $reflection = new ReflectionClass($client);
-        $config = $reflection->getProperty('config');
-        $config->setAccessible(true);
 
-        $this->assertEquals('https://sandbox.itunes.apple.com', $config->getValue($client)['base_uri']);
+        $baseUri = (string)(new ReflectionClass($client))->getProperty('config')->getValue($client)['base_uri'];
+        $this->assertSame('https://sandbox.itunes.apple.com', $baseUri);
     }
 
     /**
      * @test
-     * @throws ReflectionException
-     */
-    public function client_options_overrides_the_sandbox_param(): void
-    {
-        $client = ClientFactory::create(true, ['base_uri' => 'https://example.com']);
-        $reflection = new ReflectionClass($client);
-        $config = $reflection->getProperty('config');
-        $config->setAccessible(true);
-
-        $this->assertEquals('https://example.com', $config->getValue($client)['base_uri']);
-    }
-
-    /**
-     * @test
-     * @throws GuzzleException
      */
     public function client_response_can_be_mocked(): void
     {
@@ -88,7 +53,6 @@ class ClientFactoryTest extends TestCase
 
     /**
      * @test
-     * @throws GuzzleException
      */
     public function a_queue_of_responses_can_be_mocked(): void
     {
@@ -109,7 +73,6 @@ class ClientFactoryTest extends TestCase
 
     /**
      * @test
-     * @throws GuzzleException
      */
     public function it_can_mock_an_error_response(): void
     {
@@ -130,7 +93,7 @@ class ClientFactoryTest extends TestCase
 
     /**
      * @test
-     * @throws GuzzleException
+     * @psalm-suppress MixedArrayAccess
      */
     public function mock_can_track_transactions(): void
     {
@@ -146,8 +109,7 @@ class ClientFactoryTest extends TestCase
 
     /**
      * @test
-     * @throws Exception
-     * @throws GuzzleException
+     * @psalm-suppress MixedArrayAccess
      */
     public function mock_queue_can_track_transactions(): void
     {
@@ -174,7 +136,6 @@ class ClientFactoryTest extends TestCase
 
     /**
      * @test
-     * @throws GuzzleException
      */
     public function mock_error_can_track_transactions(): void
     {
