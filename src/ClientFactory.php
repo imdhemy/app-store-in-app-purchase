@@ -2,6 +2,7 @@
 
 namespace Imdhemy\AppStore;
 
+use ArrayAccess;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Handler\MockHandler;
@@ -65,17 +66,15 @@ class ClientFactory
     /**
      * Creates a client that returns the specified array of responses in queue order
      *
-     * @param array|ResponseInterface[]|RequestExceptionInterface[] $responseQueue
-     * @param array $transactions
-     *
-     * @psalm-suppress ReferenceConstraintViolation
+     * @param array<int, ResponseInterface|RequestExceptionInterface> $responseQueue
+     * @param array|ArrayAccess<int, array> $container Container to hold the history (by reference).
      * @return ClientInterface
      */
-    public static function mockQueue(array $responseQueue, array &$transactions = []): ClientInterface
+    public static function mockQueue(array $responseQueue, array|ArrayAccess &$container = []): ClientInterface
     {
         $mockHandler = new MockHandler($responseQueue);
         $handlerStack = HandlerStack::create($mockHandler);
-        $handlerStack->push(Middleware::history($transactions));
+        $handlerStack->push(Middleware::history($container));
 
         return new Client(['handler' => $handlerStack]);
     }
