@@ -36,13 +36,13 @@
     }
   },
   "scripts": {
-    "psalm-info": "vendor/bin/psalm --show-info=true",
     "test": "vendor/bin/phpunit --testdox",
-    "keygen": "sh ./bin/keygen.sh",
-    "security-advice": "composer update --dry-run roave/security-advisories",
     "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff --verbose",
     "cs-fix": "php-cs-fixer fix --verbose",
     "psalm": "psalm --no-cache",
+    "psalm-f": "psalm --ignore-baseline --output-format=compact",
+    "psalm-u": "psalm --update-baseline",
+    "keygen": "sh ./bin/keygen.sh",
     "post-autoload-dump": [
       "@keygen"
     ]
