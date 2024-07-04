@@ -110,12 +110,17 @@ class Verifier
      */
     private function buildRequestOptions(bool $excludeOldTransactions): array
     {
+        $payload = [
+            'receipt-data' => $this->receiptData,
+            'exclude-old-transactions' => $excludeOldTransactions,
+        ];
+
+        if(!empty($this->password)) {
+            $payload['password'] = $this->password;
+        }
+
         return [
-            'json' => [
-                'receipt-data' => $this->receiptData,
-                'password' => $this->password,
-                'exclude-old-transactions' => $excludeOldTransactions,
-            ],
+            'json' => $payload,
         ];
     }
 
